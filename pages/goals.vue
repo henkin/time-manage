@@ -3,18 +3,32 @@
         <div style="width: 100%">
 
             <!--<logo/>-->
-            <h1 class="title">
-                I am here
-            </h1>
-            <h2 class="subtitle">
-                <span>title</span>
-
-                <div class="input-container">
-                    <input id="input" type="text"/>
+            <div class="row">
+                <div class="col-sm">
+                    <h1 class="title">
+                        Goals
+                    </h1>
                 </div>
-            </h2>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <span>New goal:</span>
 
-            <div>{{$store.counter}}</div>
+                    <div class="goal-title-container">
+                        <form class="form-inline goal-form" v-on:submit.prevent="createGoal">
+                            <div class="input-group">
+                                <label class="sr-only" for="inlineFormInput">Name</label>
+                                <input v-model="title" id="goal-title" type="text" v-focus="focused" @focus="focused = true" @blur="focused = false"/>
+                                <!--<div class="input-group-addon">@</div>-->
+                                <button type="submit" class="btn btn-primary right-side">Submit</button>
+                            </div>
+                        </form>
+                        <!--<button type="submit" text="asdf">yes</button>-->
+                    </div>
+                </div>
+            </div>
+
+            <!--<div>{{$store.counter}}</div>-->
             <button @click="$store.commit('increment')">{{ $store.state.counter }}</button>
         </div>
     </section>
@@ -22,30 +36,47 @@
 
 <script>
   // import Logo from '~/components/Logo.vue'
+  import { focus } from 'vue-focus'
 
   export default {
+    directives: { focus: focus },
     components: {
-      // Logo
+    },
+    data () {
+      return {
+        focused: true,
+        title: ''
+      }
+    },
+    methods: {
+      createGoal () {
+        alert('yup')
+      }
     }
   }
 </script>
 
 <style>
     [class*='col-'] {
-        background: lightgreen;
+        background: #EEE;
     }
 
-    #input {
+    button {
+        font-size: 30pt;
+    }
+
+    #goal-title {
         font-size: 30pt;
         width: 100%;
         height: 100%;
         border: 0;
         padding: 0;
         margin: 0;
+        border-radius: 5px 0 0 5px;
     }
 
-    .input-container {
-        border: 5px dashed #EEE;
+    .goal-title-container {
+        /*border: 2px dashed white;*/
         border-radius: 12px;
         width: 80%;
     }
@@ -84,13 +115,13 @@
         text-align: left;
     }
 
-    .left-side {
+    .right-side {
         justify-content: right;
         align-items: right;
         text-align: right;
     }
 
-    .right-side {
+    .left-side {
         justify-content: left;
         align-items: left;
         text-align: left;
