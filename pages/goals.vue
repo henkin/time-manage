@@ -15,14 +15,19 @@
           <span>New goal:</span>
 
           <div class="goal-title-container">
-            <form class="form-inline goal-form" v-on:submit.prevent="createGoal">
+            <form class="form-inline goal-form"
+                  v-on:submit.prevent="createGoal"
+                  autocomplete="off">
               <div class="input-group">
                 <label class="sr-only" for="inlineFormInput">Name</label>
+                <!-- these are to remove the autocomplete from Chrome -->
+                <input style="display:none" type="text" name="fakeusernameremembered"/>
+                <input style="display:none" type="password" name="fakepasswordremembered"/>
                 <input v-model="goalName"
                        autofocus
-                       ref='search'
-                       id="goal-title"
                        type="text"
+                       autocomplete="new-password"
+                       id="goal-title"
                        v-focus="focused"
                        @focus="focused = true"
                        @blur="focused = false"
@@ -40,10 +45,10 @@
       <div class="row">
 
         <div class="col-sm">
-          <h2>Count: {{goals.length}}</h2>
+
+          </div>      <h2>Count: {{goals.length}}</h2>
           <div v-for="goal in goals">
-            <p><h3>{{goal}}</h3></p>
-          </div>
+            <p><h3>{{goal}}</h3>
         </div>
       </div>
       <!--<div>{{$store.counter}}</div>-->
@@ -54,6 +59,7 @@
 
 <script>
   // import Logo from '~/components/Logo.vue'
+  import { mapState } from 'vuex'
   import { focus } from 'vue-focus'
 
   export default {
@@ -62,17 +68,17 @@
     data () {
       return {
         focused: true,
-        goals: [],
         goalName: ''
       }
     },
     methods: {
       createGoal () {
-        this.goals.push(this.goalName)
+        this.$store.dispatch('addGoal', { payload: this.goalName })
         this.goalName = ''
         document.getElementById('goal-title').focus()
       }
-    }
+    },
+    computed: mapState(['goals'])
   }
 </script>
 
