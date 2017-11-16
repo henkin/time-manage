@@ -20,8 +20,8 @@ const createStore = () => {
       async addGoal ({commit}, payload) {
         try {
           commit('addGoal', payload)
-          let addGoalResult = await axios.post(`/goals`, payload)
-          console.log(addGoalResult)
+          let addGoalResult = await axios.post(`/api/goals`, payload)
+          console.log(addGoalResult.data)
         } catch (err) {
           console.error(err)
         }

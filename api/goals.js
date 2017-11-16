@@ -1,6 +1,4 @@
-import { Router } from 'express'
-
-const router = Router()
+const router = require('express').Router()
 
 // Mock Users
 const users = [
@@ -9,16 +7,23 @@ const users = [
   { name: 'Sébastien' }
 ]
 
-console.info('tarting api')
+console.info('loaded Goals API')
 
-/* POST users listing. */
+/* GET goals. */
+router.get('/goals', function (req, res, next) {
+  console.log(req)
+  res.json(users)
+})
+
+/* POST create goal */
 router.post('/goals', function (req, res, next) {
-  console.log(req.body)
+  // console.log('got data: ', req.body)
+  console.log('name: ', req.body.name)
   res.json(users)
 })
 
 /* GET user by ID. */
-router.get('/users/:id', function (req, res, next) {
+router.get('/goals/:id', function (req, res, next) {
   const id = parseInt(req.params.id)
   if (id >= 0 && id < users.length) {
     res.json(users[id])
@@ -27,4 +32,4 @@ router.get('/users/:id', function (req, res, next) {
   }
 })
 
-export default router
+module.exports = router

@@ -15,15 +15,17 @@
   "dependencies": {
     "axios": "^0.17.1",
     "backpack-core": "^0.4.3",
+    "body-parser": "^1.18.2",
     "bootstrap": "^4.0.0-beta.2",
     "bootstrap-vue": "^1.0.2",
     "express": "^4.16.2",
-    "nuxt": "^1.0.0-rc11",
+    "jquery": "^3.2.1",
+    "nuxt": "^1.0.0-rc9",
     "vue-focus": "^2.1.0"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
-    "eslint": "^4.3.0",
+    "eslint": "^4.11.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-loader": "^1.9.0",
     "eslint-plugin-html": "^3.1.1",
