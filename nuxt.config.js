@@ -42,5 +42,8 @@ module.exports = {
         })
       }
     }
-  }
+  },
+  serverMiddleware: [
+    '~/api/index.js'
+  ]
 }

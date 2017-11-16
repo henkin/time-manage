@@ -13,8 +13,11 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
+    "axios": "^0.17.1",
+    "backpack-core": "^0.4.3",
     "bootstrap": "^4.0.0-beta.2",
     "bootstrap-vue": "^1.0.2",
+    "express": "^4.16.2",
     "nuxt": "^1.0.0-rc11",
     "vue-focus": "^2.1.0"
   },

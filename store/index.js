@@ -1,4 +1,5 @@
 import Vuex from 'vuex'
+import axios from 'axios'
 
 const createStore = () => {
   return new Vuex.Store({
@@ -16,11 +17,20 @@ const createStore = () => {
       }
     },
     actions: {
-      addGoal ({commit}, payload) {
-        setTimeout(() => {
-          console.log('action: addGoal', payload)
+      async addGoal ({commit}, payload) {
+        try {
           commit('addGoal', payload)
-        }, 1000)
+          let addGoalResult = await axios.post(`/goals`, payload)
+          console.log(addGoalResult)
+        } catch (err) {
+          console.error(err)
+        }
+        // await axios('/goals/')
+        // console.log(addGoalResult)
+        // setTimeout(() => {
+        //   console.log('action: addGoal', payload)
+        //   commit('addGoal', payload)
+        // }, 1000)
       }
     }
     // actions: {
