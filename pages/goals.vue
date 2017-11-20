@@ -59,7 +59,7 @@
 
 <script>
   // import Logo from '~/components/Logo.vue'
-  import { mapState } from 'vuex'
+  // import { mapState } from 'vuex'
   import { focus } from 'vue-focus'
 
   export default {
@@ -79,8 +79,17 @@
       }
     },
     computed: {
-      ...mapState(['goals'])
+      // ...mapState(['goals']),
+      goals () { // also possible with mapGetters(['users'])
+        return this.$store.getters.goals
+      }
+    },
+    created () {
+      this.$store.dispatch('goals')
     }
+//    created: {
+//      this.$store.dispatch('getUsers')
+//    },
   }
 </script>
 

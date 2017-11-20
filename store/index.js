@@ -4,17 +4,19 @@ import axios from 'axios'
 const createStore = () => {
   return new Vuex.Store({
     state: {
-      counter: 0,
-      goals: []
+      goals: []// async () => axios.get(`/api/goals`)
     },
     mutations: {
-      increment (state) {
-        state.counter++
-      },
       addGoal (state, payload) {
         console.log('store.addGoal: ' + payload.name)
         state.goals.push(payload.name)
+      },
+      setGoals (state, goals) {
+        state.goals = goals
       }
+    },
+    getters: {
+      goals (state) { return state.goals }
     },
     actions: {
       async addGoal ({commit}, payload) {
@@ -25,12 +27,16 @@ const createStore = () => {
         } catch (err) {
           console.error(err)
         }
-        // await axios('/goals/')
-        // console.log(addGoalResult)
-        // setTimeout(() => {
-        //   console.log('action: addGoal', payload)
-        //   commit('addGoal', payload)
-        // }, 1000)
+      },
+
+      async loadGoals ({commit}) {
+        try {
+          let goals = await axios.get(`/api/goals`)
+          console.log(goals)
+          commit('setGoals', goals)
+        } catch (err) {
+          console.error(err)
+        }
       }
     }
     // actions: {
