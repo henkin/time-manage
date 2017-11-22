@@ -10,7 +10,8 @@ module.exports = {
       { hid: 'description', name: 'description', content: 'Time Management using Vue' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://bootswatch.com/4/darkly/bootstrap.css' }
     ]
   },
 

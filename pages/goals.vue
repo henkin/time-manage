@@ -91,8 +91,9 @@
 </script>
 
 <style>
+
     [class*='col-'] {
-        background: #EEE;
+        /*background: #111;*/
     }
 
     button {
@@ -143,22 +144,9 @@
         /*text-align: right;*/
     }
 
-    .links {
-        padding-top: 15px;
-        font-size: 17pt;
-        text-align: left;
-    }
-
-    .right-side {
+   .right-side {
         justify-content: right;
         align-items: right;
         text-align: right;
-    }
-
-    .left-side {
-        justify-content: left;
-        align-items: left;
-        text-align: left;
-        background-color: lightblue;
     }
 </style>
