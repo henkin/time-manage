@@ -44,7 +44,7 @@
 
             <div class="row">
                 <div class="col-sm">
-                    <h2>Count: {{goals.length}}</h2>
+                    <h2>Count: {{ goals }}</h2>
                     <div v-for="goal in goals">
                         <p>
                         <h3>{{goal}}</h3>
@@ -59,7 +59,7 @@
 
 <script>
   // import Logo from '~/components/Logo.vue'
-  // import { mapState } from 'vuex'
+  import { mapGetters } from 'vuex'
   import { focus } from 'vue-focus'
 
   export default {
@@ -79,13 +79,10 @@
       }
     },
     computed: {
-      // ...mapState(['goals']),
-      goals () { // also possible with mapGetters(['users'])
-        return this.$store.getters.goals
-      }
+      ...mapGetters(['goals'])
     },
     created () {
-      this.$store.dispatch('goals')
+      this.$store.dispatch('loadGoals')
     }
 //    created: {
 //      this.$store.dispatch('getUsers')

@@ -11,7 +11,7 @@ const createStore = () => {
         console.log('store.addGoal: ' + payload.name)
         state.goals.push(payload.name)
       },
-      setGoals (state, goals) {
+      loadGoals (state, goals) {
         state.goals = goals
       }
     },
@@ -25,17 +25,19 @@ const createStore = () => {
           let addGoalResult = await axios.post(`/api/goals`, payload)
           console.log(addGoalResult.data)
         } catch (err) {
-          console.error(err)
+          console.error('BAD state.addGoal')
         }
       },
 
       async loadGoals ({commit}) {
         try {
           let goals = await axios.get(`/api/goals`)
-          console.log(goals)
-          commit('setGoals', goals)
+          // let addGoalResult = await axios.post(`/api/goals`, goals)
+          console.log('loadGoals', goals.data)
+          commit('loadGoals', goals.data)
         } catch (err) {
-          console.error(err)
+          commit('loadGoals', {})
+          console.warn('failed: state.loadGoals')
         }
       }
     }

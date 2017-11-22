@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const r = require('rethinkdbdash')()
+const eventer = require('./eventer')
 
 // Mock Users
 const users = [
@@ -12,27 +12,14 @@ console.info('loaded Goals API')
 
 /* GET goals. */
 router.get('/goals', async function (req, res, next) {
-  console.log(req)
-  try {
-    let result = await r.table('data').run()
-    console.log(result, Array.isArray(result)) // true
-  } catch (err) {
-    console.error(err)
-  }
-  res.json(users)
+  let result = await eventer.find('goal')
+  res.json(result)
 })
 
 /* POST create goal */
 router.post('/goals', async function (req, res, next) {
-  // console.log('got data: ', req.body)
-  let tableList = await r.tableList()
-  if (!tableList.find(e => e === 'events')) {
-    await r.tableCreate('events')
-  }
-  let insertResult = await r.table('events').insert({ createdAt: new Date(), entity: req.body })
-  console.log(insertResult, Array.isArray(insertResult))
-  console.log('body: ', req.body)
-  res.json(users)
+  let result = await eventer.create('goal', req.body)
+  res.json(result)
 })
 
 /* GET user by ID. */
