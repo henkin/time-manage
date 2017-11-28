@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const eventer = require('./eventer')
+const eventer = require('../lib/eventer/eventer')
 
 // Mock Users
 const users = [
