@@ -45,6 +45,6 @@ module.exports = {
     }
   },
   serverMiddleware: [
-    '~/api/index.js'
+    '~/api/Entity.js'
   ]
 }
