@@ -15,6 +15,11 @@ router.use(goals)
 
 app.use(router)
 
+process.on('unhandledRejection', error => {
+  // Won't execute
+  console.log('unhandledRejection', error);
+});
+
 module.exports = {
   path: '/api',
   handler: app

@@ -44,10 +44,10 @@
 
             <div class="row">
                 <div class="col-sm">
-                    <h2>Count: {{ goals }}</h2>
+                    <h2>Count: {{ goals.length }}</h2>
                     <div v-for="goal in goals">
                         <p>
-                        <h3>{{goal}}</h3>
+                        <h2>{{ goal.name }}</h2>
                     </div>
                 </div>
             </div>

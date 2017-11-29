@@ -1,35 +1,29 @@
 const router = require('express').Router()
-const eventer = require('../lib/eventer/eventer')
-
-// Mock Users
-const users = [
-  {name: 'Alexandre'},
-  {name: 'Pooya'},
-  {name: 'Sébastien'}
-]
+const repo = require('../lib/repo')
+const Goal = require('../lib/entities/Goal')
 
 console.info('loaded Goals API')
 
 /* GET goals. */
 router.get('/goals', async function (req, res, next) {
-  let result = await eventer.find('goal')
+  let result = await repo.find('goals')
   res.json(result)
 })
 
 /* POST create goal */
 router.post('/goals', async function (req, res, next) {
-  let result = await eventer.create('goal', req.body)
+  let result = await repo.create(new Goal(req.body.name))
   res.json(result)
 })
 
 /* GET user by ID. */
-router.get('/goals/:id', function (req, res, next) {
-  const id = parseInt(req.params.id)
-  if (id >= 0 && id < users.length) {
-    res.json(users[id])
-  } else {
-    res.sendStatus(404)
-  }
-})
+// router.get('/goals/:id', function (req, res, next) {
+//   const id = parseInt(req.params.id)
+//   if (id >= 0 && id < users.length) {
+//     res.json(users[id])
+//   } else {
+//     res.sendStatus(404)
+//   }
+// })
 
 module.exports = router

@@ -31,13 +31,14 @@ const createStore = () => {
 
       async loadGoals ({commit}) {
         try {
+          // https://github.com/nuxt-community/adonuxt-template/issues/32
           let goals = await axios.get(`/api/goals`)
           // let addGoalResult = await axios.post(`/api/goals`, goals)
           console.log('loadGoals', goals.data)
           commit('loadGoals', goals.data)
         } catch (err) {
           commit('loadGoals', {})
-          console.warn('failed: state.loadGoals')
+          console.warn('failed: state.loadGoals', err)
         }
       }
     }
