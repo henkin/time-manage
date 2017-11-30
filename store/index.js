@@ -5,7 +5,7 @@ const url = (this['window']) ? `/api/goals` : `http://localhost:3000/api/goals`
 const createStore = () => {
   return new Vuex.Store({
     state: {
-      goals: []// async () => axios.get(`/api/goals`)
+      goals: []
     },
     mutations: {
       addGoal (state, payload) {
@@ -35,13 +35,10 @@ const createStore = () => {
           console.error('BAD state.addGoal')
         }
       },
-
       async loadGoals ({ dispatch, commit }) {
         try {
-          // https://github.com/nuxt-community/adonuxt-template/issues/32
           let goals = await axios.get(url)
-          // let addGoalResult = await axios.post(`/api/goals`, goals)
-          console.log('loadGoals', goals.data)
+          console.log('loadGoals', goals.data.length)
           commit('loadGoals', goals.data)
         } catch (err) {
           commit('loadGoals', {})
@@ -49,11 +46,6 @@ const createStore = () => {
         }
       }
     }
-    // actions: {
-    //   addGoal ({commit}) {
-    //     commit('addGoal', )
-    //   }
-    // }
   })
 }
 

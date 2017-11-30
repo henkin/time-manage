@@ -24,13 +24,12 @@ app.use(nuxt.render)
 // Build only in dev mode
 if (config.dev) {
   const builder = new Builder(nuxt)
-  builder.build()
-  //
-  // nuxt.build()
-  //   .catch((error) => {
-  //     console.error(error) // eslint-disable-line no-console
-  //     process.exit(1)
-  //   })
+  try {
+    await builder.build()
+  } catch (e) {
+    console.error(error)
+    process.exit(1)
+  }
 }
 
 process.on('unhandledRejection', error => {
