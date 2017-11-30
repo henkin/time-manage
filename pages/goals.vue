@@ -61,6 +61,12 @@
   // import Logo from '~/components/Logo.vue'
   import { mapGetters } from 'vuex'
   import { focus } from 'vue-focus'
+  import io from 'socket.io-client'
+
+  if (process.BROWSER_BUILD) {
+// eslint-disable-next-line no-unused-vars
+    const socket = io()
+  }
 
   export default {
     directives: {focus: focus},

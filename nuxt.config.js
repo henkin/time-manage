@@ -14,7 +14,9 @@ module.exports = {
       { rel: 'stylesheet', href: 'https://bootswatch.com/4/darkly/bootstrap.css' }
     ]
   },
-
+  env: {
+    HOST_URL: process.env.HOST_URL || 'http://localhost:3000'
+  },
   modules: [
     'bootstrap-vue/nuxt',
 
@@ -30,6 +32,8 @@ module.exports = {
   ** Build configuration
   */
   build: {
+    vendor: ['socket.io-client'],
+
     /*
     ** Run ESLint on save
     */
