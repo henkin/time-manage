@@ -62,10 +62,14 @@
   import { mapGetters } from 'vuex'
   import { focus } from 'vue-focus'
   import io from 'socket.io-client'
+  // eslint-disable-next-line no-unused-vars
+  let socket
 
-  if (process.BROWSER_BUILD) {
-// eslint-disable-next-line no-unused-vars
-    const socket = io()
+  if (typeof window !== 'undefined') {
+    console.log('window!')
+
+    socket = io()
+    console.log(socket)
   }
 
   export default {

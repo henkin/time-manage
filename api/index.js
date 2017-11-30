@@ -2,8 +2,8 @@ const express = require('express')
 const router = express.Router()
 const goals = require('./goals')
 let app = express()
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+const server = require('http').createServer(app)
+const io = require('socket.io')(server)
 
 const bodyParser = require('body-parser')
 app.use(bodyParser.json()) // to support JSON-encoded bodies
@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 })
 
 io.on('connection', function(socket) {
-  console.log('a user connected');
+  console.warn('a user connected');
 });
 
 router.use(goals)
