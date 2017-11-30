@@ -23,7 +23,7 @@
                                 <!-- these are to remove the autocomplete from Chrome -->
                                 <input style="display:none" type="text" name="fakeusernameremembered"/>
                                 <input style="display:none" type="password" name="fakepasswordremembered"/>
-                                <input v-model="goalName"
+                                <input v-model="name"
                                        autofocus
                                        type="text"
                                        autocomplete="new-password"
@@ -68,13 +68,13 @@
     data () {
       return {
         focused: true,
-        goalName: ''
+        name: ''
       }
     },
     methods: {
       createGoal () {
-        this.$store.dispatch('addGoal', {name: this.goalName})
-        this.goalName = ''
+        this.$store.dispatch('addGoal', {name: this.name})
+        this.name = ''
         document.getElementById('goal-title').focus()
       }
     },
@@ -82,7 +82,7 @@
       ...mapGetters(['goals'])
     },
     created () {
-      this.$store.dispatch('loadGoals')
+      // this.$store.dispatch('loadGoals')
     }
 //    created: {
 //      this.$store.dispatch('getUsers')
