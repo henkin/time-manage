@@ -12,7 +12,7 @@
             </div>
             <div class="row">
                 <div class="col-sm">
-                    <span>New goal:</span>
+                    <h3>New goal:</h3>
 
                     <div class="goal-title-container">
                         <form class="form-inline goal-form"
@@ -44,7 +44,7 @@
 
             <div class="row">
                 <div class="col-sm">
-                    <h2>Count: {{ goals.length }}</h2>
+                    <h4>Count: {{ goals.length }}</h4>
                     <div v-for="goal in goals">
                         <p>
                         <h2>{{ goal.name }}</h2>
