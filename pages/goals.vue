@@ -61,15 +61,6 @@
   // import Logo from '~/components/Logo.vue'
   import { mapGetters } from 'vuex'
   import { focus } from 'vue-focus'
-  import io from 'socket.io-client'
-  let socket
-
-  if (typeof window !== 'undefined') {
-    socket = io()
-    socket.on('change', data => {
-      console.log('change happened: ', data)
-    })
-  }
 
   export default {
     directives: {focus: focus},

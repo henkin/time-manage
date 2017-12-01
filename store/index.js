@@ -1,6 +1,21 @@
 import Vuex from 'vuex'
 import axios from 'axios'
-const url = (this['window']) ? `/api/goals` : `http://localhost:3000/api/goals`
+import io from 'socket.io-client'
+import socketClient from '../socket/client'
+
+const isBrowser = typeof window !== 'undefined'
+const url = isBrowser ? `/api/goals` : `http://localhost:3000/api/goals`
+let socket
+
+if (isBrowser) {
+  socket = io()
+
+  socketClient.init(socket)
+
+  // socket.on('data', data => {
+  //   console.log('client received "data": ', data)
+  // })
+}
 
 const createStore = () => {
   return new Vuex.Store({
@@ -24,7 +39,9 @@ const createStore = () => {
         // if (req.session && req.session.authUser) {
         //   commit('SET_USER', req.session.authUser)
         // }
-        return dispatch('loadGoals')
+        return dispatch('loadGoals').then(() =>
+          socketClient.subscribe('goals', x => commit('loadGoals', x))
+        )
       },
       async addGoal ({commit}, payload) {
         try {

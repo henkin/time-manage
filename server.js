@@ -2,7 +2,7 @@ const Nuxt = require('nuxt').Nuxt
 const Builder = require('nuxt').Builder
 const express = require('express')
 const bodyParser = require('body-parser')
-
+const eventer = require('./lib/eventer')
 const app = express()
 app.use(bodyParser.json()) // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({extended: true}))
@@ -34,13 +34,14 @@ process.on('unhandledRejection', error => {
 server.listen(port, '0.0.0.0')
 console.log('Server listening on localhost:' + port) // eslint-disable-line no-console
 
-io.on('connection', (socket) => {
-  console.log('socket connected')
-  // socket.on('last-messages', function (fn) {
-  //   fn(messages.slice(-50))
-  // });
-  // socket.on('send-message', function (message) {
-  //   messages.push(message)
-  //   socket.broadcast.emit('new-message', message)
-  // })
-})
+io.on('connection', eventer.socketServerInit)
+// (socket) => {
+//   console.log('socket connected: ' + socket.id)
+//   // socket.on('last-messages', function (fn) {
+//   //   fn(messages.slice(-50))
+//   // });
+//   // socket.on('send-message', function (message) {
+//   //   messages.push(message)
+//   //   socket.broadcast.emit('new-message', message)
+//   // })
+// })
