@@ -45,7 +45,7 @@
             <div class="row">
                 <div class="col-sm">
                     <h4>Count: {{ goals.length }}</h4>
-                    <div v-for="goal in goals">
+                    <div v-for="goal in goals" :key="goal.id">
                         <p>
                         <h2>{{ goal.name }}</h2>
                     </div>
@@ -61,6 +61,7 @@
   // import Logo from '~/components/Logo.vue'
   import { mapGetters } from 'vuex'
   import { focus } from 'vue-focus'
+  import io from 'socket.io-client'
 
   export default {
     directives: {focus: focus},
@@ -73,7 +74,7 @@
     },
     methods: {
       createGoal () {
-        this.$store.dispatch('addGoal', {name: this.name})
+        this.$store.dispatch('addGoal', this.name)
         this.name = ''
         document.getElementById('goal-title').focus()
       }
@@ -83,6 +84,9 @@
     },
     created () {
       // this.$store.dispatch('loadGoals')
+      if (process.browser) {
+        this.$store.dispatch('init', io())
+      }
     }
 //    created: {
 //      this.$store.dispatch('getUsers')

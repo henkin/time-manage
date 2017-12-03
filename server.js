@@ -21,13 +21,13 @@ app.use(nuxt.render)
 if (config.dev) {
   const builder = new Builder(nuxt)
   builder.build().catch(err => {
-    console.error(err)
+    console.error('builder', err)
     process.exit(1)
   })
 }
 
 process.on('unhandledRejection', error => {
-  console.log('unhandledRejection', error);
+  console.error('unhandledRejection', error);
 });
 
 // Listen the server

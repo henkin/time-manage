@@ -1,21 +1,11 @@
 import Vuex from 'vuex'
 import axios from 'axios'
-import io from 'socket.io-client'
 import socketClient from '../socket/client'
+import uuidv4 from 'uuid/v4'
 
+import { update } from '../lib/updater'
 const isBrowser = typeof window !== 'undefined'
 const url = isBrowser ? `/api/goals` : `http://localhost:3000/api/goals`
-let socket
-
-if (isBrowser) {
-  socket = io()
-
-  socketClient.init(socket)
-
-  // socket.on('data', data => {
-  //   console.log('client received "data": ', data)
-  // })
-}
 
 const createStore = () => {
   return new Vuex.Store({
@@ -27,8 +17,17 @@ const createStore = () => {
         console.log('store.addGoal: ' + payload.name)
         state.goals.push(payload)
       },
+      // updateGoal (state, updated) {
+      //   let found = state.goals.find(g => g.submitted === updated.submitted)
+      //   console.log('found: ', found, 'updated', updated)
+      //   Object.assign(found, {}, updated)
+      // },
       loadGoals (state, goals) {
         state.goals = goals
+      },
+      updateArray (state, updates) {
+        console.info('store.updateArray', JSON.stringify(updates, null, 2))
+        update(state.goals, updates)
       }
     },
     getters: {
@@ -39,15 +38,18 @@ const createStore = () => {
         // if (req.session && req.session.authUser) {
         //   commit('SET_USER', req.session.authUser)
         // }
-        return dispatch('loadGoals').then(() =>
-          socketClient.subscribe('goals', x => commit('loadGoals', x))
-        )
+        return dispatch('loadGoals')
       },
-      async addGoal ({commit}, payload) {
+      async addGoal ({commit}, name) {
         try {
-          commit('addGoal', payload)
-          let addGoalResult = await axios.post(url, payload)
-          console.log(addGoalResult.data)
+          // let submittedDate = new Date()
+          let goal = { name: name, id: uuidv4() }
+          commit('addGoal', goal)
+          let addGoalResult = await axios.post(url, goal)
+          return addGoalResult;
+          // let combined = { ...addGoalResult.data, submitted: submittedDate }
+          // console.info('combined', combined)
+          // commit('updateGoal', combined)
         } catch (err) {
           console.error('BAD state.addGoal')
         }
@@ -61,6 +63,10 @@ const createStore = () => {
           commit('loadGoals', {})
           console.warn('failed: state.loadGoals', err)
         }
+      },
+      async init ({ dispatch, commit }, io) {
+        socketClient.init(io)
+        socketClient.subscribe(io, 'goals', x => commit('updateArray', x))
       }
     }
   })

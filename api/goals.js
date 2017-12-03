@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const repo = require('../lib/repo')
-const Goal = require('../lib/entities/Goal')
+const Goal = require('../entities/Goal')
 
 console.info('loaded Goals API')
 
@@ -12,7 +12,7 @@ router.get('/goals', async function (req, res, next) {
 
 /* POST create goal */
 router.post('/goals', async function (req, res, next) {
-  let result = await repo.create(new Goal(req.body.name))
+  let result = await repo.create(new Goal({ id: req.body.id, name: req.body.name }))
   res.json(result)
 })
 

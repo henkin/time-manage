@@ -3,14 +3,15 @@ let socket;
 
 function init (clientSocket) {
   socket = clientSocket
-  socket.on('data', data => {
-    console.log('client received "data": ', data)
+  socket.on('data', ({ tableName, record }) => {
+    console.info(`socket received - ${tableName}`, record)
+    clientSubscribers[tableName](record) // love js
   })
 }
 
-function subscribe (url, action) {
+function subscribe (io, url, action) {
   clientSubscribers[url] = action
-  socket.emit('subscribe', {url, action})
+  io.emit('subscribe', url)
 }
 
 module.exports = {
