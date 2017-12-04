@@ -12,9 +12,14 @@ router.get('/ideas', async function (req, res, next) {
 
 /* POST create idea */
 router.post('/ideas', async function (req, res, next) {
+  await timeout(3000);
   let result = await repo.create(new Idea({ id: req.body.id, name: req.body.name }))
   res.json(result)
 })
+
+function timeout (ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 /* GET user by ID. */
 // router.get('/ideas/:id', function (req, res, next) {

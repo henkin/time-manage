@@ -45,10 +45,11 @@
             <div class="row">
                 <div class="col-sm">
                     <h4>Count: {{ ideas.length }}</h4>
+
                     <div v-for="idea in ideas" :key="idea.id">
-                        <p>
-                        <h2>{{ idea.name }}</h2>
+                        <h2 class="idea-item" v-bind:class="{saving: !idea.createdAt }">{{ idea.name }}</h2>
                     </div>
+
                 </div>
             </div>
             <!--<div>{{$store.counter}}</div>-->
@@ -81,6 +82,7 @@
     },
     computed: {
       ...mapGetters(['ideas'])
+
     },
     created () {
       // this.$store.dispatch('loadIdeas')
@@ -95,6 +97,13 @@
 </script>
 
 <style>
+    .idea-item {
+      transition: opacity 1s ease-in-out;
+    }
+
+    .saving {
+      opacity: 0.5;
+    }
 
     [class*='col-'] {
         /*background: #111;*/
@@ -153,4 +162,6 @@
         align-items: right;
         text-align: right;
     }
+
+
 </style>

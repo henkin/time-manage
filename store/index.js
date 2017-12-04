@@ -15,13 +15,8 @@ const createStore = () => {
     mutations: {
       addIdea (state, payload) {
         console.log('store.addIdea: ' + payload.name)
-        state.ideas.push(payload)
+        state.ideas.unshift(payload)
       },
-      // updateIdea (state, updated) {
-      //   let found = state.ideas.find(g => g.submitted === updated.submitted)
-      //   console.log('found: ', found, 'updated', updated)
-      //   Object.assign(found, {}, updated)
-      // },
       loadIdeas (state, ideas) {
         state.ideas = ideas
       },
@@ -42,16 +37,12 @@ const createStore = () => {
       },
       async addIdea ({commit}, name) {
         try {
-          // let submittedDate = new Date()
           let idea = { name: name, id: uuidv4() }
           commit('addIdea', idea)
           let addIdeaResult = await axios.post(url, idea)
           return addIdeaResult;
-          // let combined = { ...addIdeaResult.data, submitted: submittedDate }
-          // console.info('combined', combined)
-          // commit('updateIdea', combined)
         } catch (err) {
-          console.error('BAD state.addIdea')
+          console.error('BAD state.addIdea', err)
         }
       },
       async loadIdeas ({ dispatch, commit }) {
