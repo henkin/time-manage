@@ -1,6 +1,6 @@
 const Entity = require('../lib/entities/Entity')
 
-class Goal extends Entity {
+class Idea extends Entity {
   constructor ({name, id}) {
     super()
     this.name = name
@@ -8,4 +8,4 @@ class Goal extends Entity {
   }
 }
 
-module.exports = Goal
+module.exports = Idea

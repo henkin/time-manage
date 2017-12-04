@@ -5,68 +5,68 @@ import uuidv4 from 'uuid/v4'
 
 import { update } from '../lib/updater'
 const isBrowser = typeof window !== 'undefined'
-const url = isBrowser ? `/api/goals` : `http://localhost:3000/api/goals`
+const url = isBrowser ? `/api/ideas` : `http://localhost:3000/api/ideas`
 
 const createStore = () => {
   return new Vuex.Store({
     state: {
-      goals: []
+      ideas: []
     },
     mutations: {
-      addGoal (state, payload) {
-        console.log('store.addGoal: ' + payload.name)
-        state.goals.push(payload)
+      addIdea (state, payload) {
+        console.log('store.addIdea: ' + payload.name)
+        state.ideas.push(payload)
       },
-      // updateGoal (state, updated) {
-      //   let found = state.goals.find(g => g.submitted === updated.submitted)
+      // updateIdea (state, updated) {
+      //   let found = state.ideas.find(g => g.submitted === updated.submitted)
       //   console.log('found: ', found, 'updated', updated)
       //   Object.assign(found, {}, updated)
       // },
-      loadGoals (state, goals) {
-        state.goals = goals
+      loadIdeas (state, ideas) {
+        state.ideas = ideas
       },
       updateArray (state, updates) {
         console.info('store.updateArray', JSON.stringify(updates, null, 2))
-        update(state.goals, updates)
+        update(state.ideas, updates)
       }
     },
     getters: {
-      goals (state) { return state.goals }
+      ideas (state) { return state.ideas }
     },
     actions: {
       nuxtServerInit ({ dispatch, commit }, { req }) {
         // if (req.session && req.session.authUser) {
         //   commit('SET_USER', req.session.authUser)
         // }
-        return dispatch('loadGoals')
+        return dispatch('loadIdeas')
       },
-      async addGoal ({commit}, name) {
+      async addIdea ({commit}, name) {
         try {
           // let submittedDate = new Date()
-          let goal = { name: name, id: uuidv4() }
-          commit('addGoal', goal)
-          let addGoalResult = await axios.post(url, goal)
-          return addGoalResult;
-          // let combined = { ...addGoalResult.data, submitted: submittedDate }
+          let idea = { name: name, id: uuidv4() }
+          commit('addIdea', idea)
+          let addIdeaResult = await axios.post(url, idea)
+          return addIdeaResult;
+          // let combined = { ...addIdeaResult.data, submitted: submittedDate }
           // console.info('combined', combined)
-          // commit('updateGoal', combined)
+          // commit('updateIdea', combined)
         } catch (err) {
-          console.error('BAD state.addGoal')
+          console.error('BAD state.addIdea')
         }
       },
-      async loadGoals ({ dispatch, commit }) {
+      async loadIdeas ({ dispatch, commit }) {
         try {
-          let goals = await axios.get(url)
-          console.log('loadGoals', goals.data.length)
-          commit('loadGoals', goals.data)
+          let ideas = await axios.get(url)
+          console.log('loadIdeas', ideas.data.length)
+          commit('loadIdeas', ideas.data)
         } catch (err) {
-          commit('loadGoals', {})
-          console.warn('failed: state.loadGoals', err)
+          commit('loadIdeas', {})
+          console.warn('failed: state.loadIdeas', err)
         }
       },
       async init ({ dispatch, commit }, io) {
         socketClient.init(io)
-        socketClient.subscribe(io, 'goals', x => commit('updateArray', x))
+        socketClient.subscribe(io, 'ideas', x => commit('updateArray', x))
       }
     }
   })

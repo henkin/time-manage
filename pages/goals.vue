@@ -6,17 +6,17 @@
             <div class="row">
                 <div class="col-sm">
                     <h1 class="title">
-                        Goals
+                        Ideas
                     </h1>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm">
-                    <h3>New goal:</h3>
+                    <h3>New Idea:</h3>
 
-                    <div class="goal-title-container">
-                        <form class="form-inline goal-form"
-                              v-on:submit.prevent="createGoal"
+                    <div class="idea-title-container">
+                        <form class="form-inline idea-form"
+                              v-on:submit.prevent="createIdea"
                               autocomplete="off">
                             <div class="input-group">
                                 <label class="sr-only" for="inlineFormInput">Name</label>
@@ -27,7 +27,7 @@
                                        autofocus
                                        type="text"
                                        autocomplete="new-password"
-                                       id="goal-title"
+                                       id="idea-title"
                                        v-focus="focused"
                                        @focus="focused = true"
                                        @blur="focused = false"
@@ -44,10 +44,10 @@
 
             <div class="row">
                 <div class="col-sm">
-                    <h4>Count: {{ goals.length }}</h4>
-                    <div v-for="goal in goals" :key="goal.id">
+                    <h4>Count: {{ ideas.length }}</h4>
+                    <div v-for="idea in ideas" :key="idea.id">
                         <p>
-                        <h2>{{ goal.name }}</h2>
+                        <h2>{{ idea.name }}</h2>
                     </div>
                 </div>
             </div>
@@ -73,17 +73,17 @@
       }
     },
     methods: {
-      createGoal () {
-        this.$store.dispatch('addGoal', this.name)
+      createIdea () {
+        this.$store.dispatch('addIdea', this.name)
         this.name = ''
-        document.getElementById('goal-title').focus()
+        document.getElementById('idea-title').focus()
       }
     },
     computed: {
-      ...mapGetters(['goals'])
+      ...mapGetters(['ideas'])
     },
     created () {
-      // this.$store.dispatch('loadGoals')
+      // this.$store.dispatch('loadIdeas')
       if (process.browser) {
         this.$store.dispatch('init', io())
       }
@@ -104,7 +104,7 @@
         font-size: 30pt;
     }
 
-    #goal-title {
+    #idea-title {
         font-size: 30pt;
         width: 100%;
         height: 100%;
@@ -114,7 +114,7 @@
         border-radius: 5px 0 0 5px;
     }
 
-    .goal-title-container {
+    .idea-title-container {
         /*border: 2px dashed white;*/
         border-radius: 12px;
         width: 80%;

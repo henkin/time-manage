@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const goals = require('./goals')
+const ideas = require('./ideas')
 let app = express()
-router.use(goals)
+router.use(ideas)
 app.use(router)
 
 module.exports = {
