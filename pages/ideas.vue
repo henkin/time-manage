@@ -42,14 +42,16 @@
             </div>
 
 
-            <div class="row">
-                <div class="col-sm">
-                    <h4>Count: {{ ideas.length }}</h4>
+            <div class="">
 
-                    <div v-for="idea in ideas" :key="idea.id">
-                        <h2 class="idea-item" v-bind:class="{saving: !idea.createdAt }">{{ idea.name }}</h2>
+                <h4>Count: {{ ideas.length }}</h4>
+
+                <div class="row idea-item" v-for="idea in ideas" :key="idea.id">
+                    <div class="col-md-3 idea-list-item"> {{ idea.createdAt }}</div>
+                    <div class="col-md-3 idea-list-item">
+                        <p class="idea-item" v-bind:class="{saving: !idea.createdAt }">{{ idea.name }}</p>
                     </div>
-
+                    <br>
                 </div>
             </div>
             <!--<div>{{$store.counter}}</div>-->
@@ -58,6 +60,84 @@
     </section>
 </template>
 
+<style>
+
+    .idea-list-item {
+        display: table-cell;
+        border: 1px dashed #DDD;
+    }
+    .idea-item {
+        word-wrap: break-word;
+
+        font-size: 20pt;
+        transition: opacity 1s ease-in-out;
+
+    }
+
+    .saving {
+        opacity: 0.5;
+    }
+
+    [class*='col-'] {
+        /*background: #111;*/
+    }
+
+    button {
+        font-size: 30pt;
+    }
+
+    #idea-title {
+        font-size: 30pt;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        padding: 0;
+        margin: 0;
+        border-radius: 5px 0 0 5px;
+    }
+
+    .idea-title-container {
+        /*border: 2px dashed white;*/
+        border-radius: 12px;
+        width: 80%;
+    }
+
+    .container-fluid {
+        /*min-height: 100vh;*/
+        display: flex;
+        white-space: nowrap;
+    }
+
+    .title {
+        font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
+        display: block;
+        font-weight: 300;
+        font-size: 100px;
+        color: #35495e;
+        letter-spacing: 1px;
+    }
+
+    .subtitle {
+
+        font-weight: 300;
+        font-size: 42px;
+        color: #526488;
+        word-spacing: 5px;
+        padding-bottom: 15px;
+
+        /*justify-content: right;*/
+        /*align-items: right;*/
+        /*text-align: right;*/
+    }
+
+    .right-side {
+        justify-content: right;
+        align-items: right;
+        text-align: right;
+    }
+
+
+</style>
 <script>
   // import Logo from '~/components/Logo.vue'
   import { mapGetters } from 'vuex'
@@ -95,73 +175,3 @@
 //    },
   }
 </script>
-
-<style>
-    .idea-item {
-      transition: opacity 1s ease-in-out;
-    }
-
-    .saving {
-      opacity: 0.5;
-    }
-
-    [class*='col-'] {
-        /*background: #111;*/
-    }
-
-    button {
-        font-size: 30pt;
-    }
-
-    #idea-title {
-        font-size: 30pt;
-        width: 100%;
-        height: 100%;
-        border: 0;
-        padding: 0;
-        margin: 0;
-        border-radius: 5px 0 0 5px;
-    }
-
-    .idea-title-container {
-        /*border: 2px dashed white;*/
-        border-radius: 12px;
-        width: 80%;
-    }
-
-    .container-fluid {
-        min-height: 100vh;
-        display: flex;
-        white-space: nowrap;
-    }
-
-    .title {
-        font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
-        display: block;
-        font-weight: 300;
-        font-size: 100px;
-        color: #35495e;
-        letter-spacing: 1px;
-    }
-
-    .subtitle {
-
-        font-weight: 300;
-        font-size: 42px;
-        color: #526488;
-        word-spacing: 5px;
-        padding-bottom: 15px;
-
-        /*justify-content: right;*/
-        /*align-items: right;*/
-        /*text-align: right;*/
-    }
-
-   .right-side {
-        justify-content: right;
-        align-items: right;
-        text-align: right;
-    }
-
-
-</style>
