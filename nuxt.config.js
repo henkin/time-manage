@@ -11,7 +11,7 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://bootswatch.com/4/darkly/bootstrap.css' }
+      // { rel: 'stylesheet', href: 'https://bootswatch.com/4/darkly/bootstrap.css' }
     ]
   },
   env: {
