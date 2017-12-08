@@ -48,11 +48,10 @@
 
         <transition-group name="idea-list" tag="ul">
           <li class="row idea-item" v-for="idea in ideas" :key="idea.id">
-            <div class="col-md-3 idea-list-createdAt"> {{ agoTime(idea.createdAt) }}</div>
-            <div class="col-md-4 idea-list-name float-right">
-              <span class="idea-item-name-span float-right" v-bind:class="{saving: !idea.createdAt }">{{ idea.name }}</span>
+            <div class="col-md-8 idea-list-name">
+              <span class="idea-item-name-span" v-bind:class="{saving: !idea.createdAt }">{{ idea.name }}</span>
             </div>
-            <br>
+            <div class="col-md-3 idea-list-createdAt float-right"> {{ agoTime(idea.createdAt) }}</div>
           </li>
         </transition-group>
 
@@ -102,12 +101,12 @@
   }
 
   .idea-item-name-span {
-    word-wrap: break-word;
+    /*word-wrap: break-word;*/
     font-size: 20pt;
   }
 
   .idea-list-name {
-    float: right;
+    /*float: right;*/
     transition: opacity 1s ease-in-out;
   }
 
