@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container">
     <div style="width: 100%">
 
       <!--<logo/>-->
@@ -45,25 +45,40 @@
       <div class="row">
 
         <h4>Count: {{ ideas.length }}</h4>
-        <ul>
-          <transition-group name="list" tag="p">
+
+        <transition-group name="idea-list" tag="ul">
           <li class="row idea-item" v-for="idea in ideas" :key="idea.id">
             <div class="col-md-3 idea-list-createdAt"> {{ agoTime(idea.createdAt) }}</div>
-            <div class="col-md-4 idea-list-name">
-              <span class="idea-item-name-span" v-bind:class="{saving: !idea.createdAt }">{{ idea.name }}</span>
+            <div class="col-md-4 idea-list-name float-right">
+              <span class="idea-item-name-span float-right" v-bind:class="{saving: !idea.createdAt }">{{ idea.name }}</span>
             </div>
             <br>
           </li>
-          </transition-group>
-        </ul>
-        </div>
-      </div>
+        </transition-group>
 
+      </div>
     </div>
   </div>
 </template>
 
 <style>
+  .idea-list-item {
+    transition: all 1s;
+  }
+
+  .idea-list-move {
+    transition: transform 1s;
+  }
+
+  .idea-list-enter, .idea-list-leave-to {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+
+  .idea-list-leave-active {
+    position: absolute;
+  }
+
   .idea-item {
     /*display: table-cell;*/
     border: 1px dashed #DDD;
@@ -83,6 +98,7 @@
 
   .idea-list-createdAt {
     font-size: small;
+
   }
 
   .idea-item-name-span {
@@ -96,9 +112,8 @@
   }
 
   /*.saving {*/
-    /*opacity: 0.5;*/
+  /*opacity: 0.5;*/
   /*}*/
-
 
   [class*='col-'] {
     /*background: #111;*/
