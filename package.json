@@ -25,6 +25,7 @@
     "mocha": "^4.0.1",
     "moment": "^2.19.3",
     "nuxt": "^1.0.0-rc9",
+    "nuxt-oauth": "^0.0.5",
     "pluralize": "^7.0.0",
     "rethinkdbdash": "^2.3.31",
     "socket.io": "^2.0.4",

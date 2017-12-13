@@ -209,6 +209,10 @@
       if (process.browser) {
         this.$store.dispatch('init', io())
       }
+    },
+    mounted () {
+      const { accessToken } = this.$store.state.oauth
+      console.log('accessToken: ', accessToken)
     }
 //    created: {
 //      this.$store.dispatch('getUsers')

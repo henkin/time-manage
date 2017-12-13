@@ -19,24 +19,17 @@ module.exports = {
   },
   modules: [
     'bootstrap-vue/nuxt',
-
+    'nuxt-oauth',
     // Or if you have custom bootstrap CSS...
     ['bootstrap-vue/nuxt', { css: false }]
   ],
-
   /*
   ** Customize the progress bar color
   */
   loading: { color: '#3B8070' },
-  /*
-  ** Build configuration
-  */
   build: {
     vendor: ['socket.io-client'],
-
-    /*
-    ** Run ESLint on save
-    */
+    /*    ** Run ESLint on save    */
     extend (config, ctx) {
       if (ctx.dev && ctx.isClient) {
         config.module.rules.push({
@@ -50,5 +43,21 @@ module.exports = {
   },
   serverMiddleware: [
     '~/api/index.js'
-  ]
+  ],
+  oauth: {
+    sessionName: 'appSession',
+    secretKey: process.env.SECRET_KEY,
+    oauthHost: process.env.OAUTH_HOST,
+    oauthClientID: process.env.OAUTH_CLIENT_ID,
+    oauthClientSecret: process.env.OAUTH_CLIENT_SECRET,
+    onLogout: (req, res) => {
+      // do something after logging out
+      console.warn('logged out')
+    },
+    fetchUser: (accessToken) => {
+      // do something to return the user
+      const user = User.findByToken(accessToken)
+      return user
+    }
+  }
 }
