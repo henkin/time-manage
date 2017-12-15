@@ -46,10 +46,10 @@ module.exports = {
   ],
   oauth: {
     sessionName: 'appSession',
-    secretKey: process.env.SECRET_KEY,
-    oauthHost: process.env.OAUTH_HOST,
-    oauthClientID: process.env.OAUTH_CLIENT_ID,
-    oauthClientSecret: process.env.OAUTH_CLIENT_SECRET,
+    secretKey: 'devKey', // process.env.SECRET_KEY,
+    oauthHost: 'https://accounts.google.com/o/oauth2/auth', // process.env.OAUTH_HOST,
+    oauthClientID: '7655171871-2fgmpiqne0q2tr38g605aad8v35nglqg.apps.googleusercontent.com', // process.env.OAUTH_CLIENT_ID,
+    oauthClientSecret: 'x0Ygh0I7RiiIB59NtfXS-NWM', // process.env.OAUTH_CLIENT_SECRET,
     onLogout: (req, res) => {
       // do something after logging out
       console.warn('logged out')
