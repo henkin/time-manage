@@ -13,8 +13,8 @@ module.exports = {
   // add your custom rules here
   rules: {
     semi: 0,
-    'spaced-comment': 0
-
+    'spaced-comment': 0,
+    'no-trailing-spaces': 0
   },
   globals: {}
 }

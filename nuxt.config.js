@@ -47,7 +47,7 @@ module.exports = {
   oauth: {
     sessionName: 'appSession',
     secretKey: 'devKey', // process.env.SECRET_KEY,
-    oauthHost: 'https://accounts.google.com/o/oauth2/auth', // process.env.OAUTH_HOST,
+    oauthHost: 'https://accounts.google.com/o/oauth2/auth', // https://accounts.google.com/o/oauth2/v2/auth // process.env.OAUTH_HOST,
     oauthClientID: '7655171871-2fgmpiqne0q2tr38g605aad8v35nglqg.apps.googleusercontent.com', // process.env.OAUTH_CLIENT_ID,
     oauthClientSecret: 'x0Ygh0I7RiiIB59NtfXS-NWM', // process.env.OAUTH_CLIENT_SECRET,
     onLogout: (req, res) => {
