@@ -9,12 +9,7 @@
                         Ideas
                     </h1>
                 </div>
-                <div class="col-sm">
-                    {{ this.$store.state.oauth }}
-                </div>
-                <div class="col-sm">
-                    <a @click="login">Log In</a>
-                </div>
+                <auth></auth>
             </div>
             <div class="row">
                 <div class="col-sm">
@@ -66,130 +61,17 @@
     </div>
 </template>
 
-<style>
-    .idea-list-item {
-        transition: all 1s;
-    }
-
-    .idea-list-move {
-        transition: transform 1s;
-    }
-
-    .idea-list-enter, .idea-list-leave-to {
-        opacity: 0;
-        transform: translateX(30px);
-    }
-
-    .idea-list-leave-active {
-        position: absolute;
-    }
-
-    .idea-item {
-        /*display: table-cell;*/
-        border: 1px dashed #DDD;
-    }
-
-    .list-enter-active, .list-leave-active {
-        /*transition: all 1s;*/
-        opacity: 1;
-    }
-
-    .list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */
-    {
-        /*opacity: 0;*/
-        opacity: 1;
-        /*transform: translateY(30px);*/
-    }
-
-    .idea-list-createdAt {
-        font-size: small;
-
-    }
-
-    .idea-item-name-span {
-        /*word-wrap: break-word;*/
-        font-size: 20pt;
-    }
-
-    .idea-list-name {
-        /*float: right;*/
-        transition: opacity 1s ease-in-out;
-    }
-
-    /*.saving {*/
-    /*opacity: 0.5;*/
-    /*}*/
-
-    [class*='col-'] {
-        /*background: #111;*/
-    }
-
-    button {
-        font-size: 30pt;
-    }
-
-    #idea-title {
-        font-size: 30pt;
-        width: 100%;
-        height: 100%;
-        border: 0;
-        padding: 0;
-        margin: 0;
-        border-radius: 5px 0 0 5px;
-    }
-
-    .idea-title-container {
-        /*border: 2px dashed white;*/
-        border-radius: 12px;
-        width: 80%;
-    }
-
-    .container-fluid {
-        /*min-height: 100vh;*/
-        display: flex;
-        white-space: nowrap;
-    }
-
-    .title {
-        font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
-        display: block;
-        font-weight: 300;
-        font-size: 100px;
-        color: #35495e;
-        letter-spacing: 1px;
-    }
-
-    .subtitle {
-
-        font-weight: 300;
-        font-size: 42px;
-        color: #526488;
-        word-spacing: 5px;
-        padding-bottom: 15px;
-
-        /*justify-content: right;*/
-        /*align-items: right;*/
-        /*text-align: right;*/
-    }
-
-    .right-side {
-        justify-content: right;
-        align-items: right;
-        text-align: right;
-    }
-
-
-</style>
 <script>
   // import Logo from '~/components/Logo.vue'
   import { mapGetters } from 'vuex'
   import { focus } from 'vue-focus'
   import io from 'socket.io-client'
   import moment from 'moment'
+  import Auth from '~/components/Auth.vue'
 
   export default {
     directives: {focus: focus},
-    components: {},
+    components: { Auth },
     data () {
       return {
         focused: true,
@@ -204,11 +86,6 @@
       },
       agoTime (dateTime) {
         return dateTime ? moment(dateTime).fromNow() : ''
-      },
-      login () {
-        const redirectUrl = this.$route.path
-        // Or another path to return to after logging in
-        this.$router.push(`/auth/login?redirect-url=${redirectUrl}`)
       }
     },
     computed: {
@@ -220,13 +97,128 @@
       if (process.browser) {
         this.$store.dispatch('init', io())
       }
-    },
-    mounted () {
-      const {accessToken} = this.$store.state.oauth
-      console.log('accessToken: ', accessToken)
     }
+    // mounted () {
+    //   const {accessToken} = this.$store.state.oauth
+    //   console.log('accessToken: ', accessToken)
+    // }
 //    created: {
 //      this.$store.dispatch('getUsers')
 //    },
   }
 </script>
+
+<style>
+  .idea-list-item {
+    transition: all 1s;
+  }
+
+  .idea-list-move {
+    transition: transform 1s;
+  }
+
+  .idea-list-enter, .idea-list-leave-to {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+
+  .idea-list-leave-active {
+    position: absolute;
+  }
+
+  .idea-item {
+    /*display: table-cell;*/
+    border: 1px dashed #DDD;
+  }
+
+  .list-enter-active, .list-leave-active {
+    /*transition: all 1s;*/
+    opacity: 1;
+  }
+
+  .list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */
+  {
+    /*opacity: 0;*/
+    opacity: 1;
+    /*transform: translateY(30px);*/
+  }
+
+  .idea-list-createdAt {
+    font-size: small;
+
+  }
+
+  .idea-item-name-span {
+    /*word-wrap: break-word;*/
+    font-size: 20pt;
+  }
+
+  .idea-list-name {
+    /*float: right;*/
+    transition: opacity 1s ease-in-out;
+  }
+
+  /*.saving {*/
+  /*opacity: 0.5;*/
+  /*}*/
+
+  [class*='col-'] {
+    /*background: #111;*/
+  }
+
+  button {
+    font-size: 30pt;
+  }
+
+  #idea-title {
+    font-size: 30pt;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    border-radius: 5px 0 0 5px;
+  }
+
+  .idea-title-container {
+    /*border: 2px dashed white;*/
+    border-radius: 12px;
+    width: 80%;
+  }
+
+  .container-fluid {
+    /*min-height: 100vh;*/
+    display: flex;
+    white-space: nowrap;
+  }
+
+  .title {
+    font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
+    display: block;
+    font-weight: 300;
+    font-size: 100px;
+    color: #35495e;
+    letter-spacing: 1px;
+  }
+
+  .subtitle {
+
+    font-weight: 300;
+    font-size: 42px;
+    color: #526488;
+    word-spacing: 5px;
+    padding-bottom: 15px;
+
+    /*justify-content: right;*/
+    /*align-items: right;*/
+    /*text-align: right;*/
+  }
+
+  .right-side {
+    justify-content: right;
+    align-items: right;
+    text-align: right;
+  }
+
+
+</style>
