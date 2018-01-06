@@ -1,11 +1,18 @@
 const Nuxt = require('nuxt').Nuxt
 const Builder = require('nuxt').Builder
 const express = require('express')
+const session = require('express-session')
 const bodyParser = require('body-parser')
 const eventer = require('./lib/eventer')
 const app = express()
 app.use(bodyParser.json()) // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({extended: true}))
+app.use(session({
+  secret: 'super-secret-key',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 60000 }
+}))
 
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)

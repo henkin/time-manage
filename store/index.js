@@ -10,7 +10,8 @@ const url = isBrowser ? `/api/ideas` : `http://localhost:3000/api/ideas`
 const createStore = () => {
   return new Vuex.Store({
     state: {
-      ideas: []
+      ideas: [],
+      authUser: null
     },
     mutations: {
       addIdea (state, payload) {
@@ -23,6 +24,9 @@ const createStore = () => {
       updateArray (state, updates) {
         console.info('store.updateArray', JSON.stringify(updates, null, 2))
         update(state.ideas, updates)
+      },
+      SET_USER: function (state, user) {
+        state.authUser = user
       }
     },
     getters: {
@@ -33,6 +37,10 @@ const createStore = () => {
         // if (req.session && req.session.authUser) {
         //   commit('SET_USER', req.session.authUser)
         // }
+        if (req.session && req.session.authUser) {
+          commit('SET_USER', req.session.authUser)
+        }
+
         return dispatch('loadIdeas')
       },
       async addIdea ({commit}, name) {
@@ -58,6 +66,23 @@ const createStore = () => {
       async init ({ dispatch, commit }, io) {
         socketClient.init(io)
         socketClient.subscribe(io, 'ideas', x => commit('updateArray', x))
+      },
+
+      async login ({ commit }, { username, password }) {
+        try {
+          const { data } = await axios.post('/api/login', { username, password })
+          commit('SET_USER', data)
+        } catch (error) {
+          if (error.response && error.response.status === 401) {
+            throw new Error('Bad credentials')
+          }
+          throw error
+        }
+      },
+
+      async logout ({ commit }) {
+        await axios.post('/api/logout')
+        commit('SET_USER', null)
       }
     }
   })
