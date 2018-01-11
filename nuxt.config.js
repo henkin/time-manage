@@ -44,22 +44,4 @@ module.exports = {
   serverMiddleware: [
     '~/api/index.js'
   ]
-  // oauth: {
-  //   sessionName: 'appSession',
-  //   secretKey: 'devKey', // process.env.SECRET_KEY,
-  //   oauthHost: 'https://accounts.google.com', // https://accounts.google.com/o/oauth2/v2/auth // process.env.OAUTH_HOST,
-  //   oauthClientID: '7655171871-2fgmpiqne0q2tr38g605aad8v35nglqg.apps.googleusercontent.com', // process.env.OAUTH_CLIENT_ID,
-  //   oauthClientSecret: 'x0Ygh0I7RiiIB59NtfXS-NWM', // process.env.OAUTH_CLIENT_SECRET,
-  //   onLogout: (req, res) => {
-  //     // do something after logging out
-  //     console.warn('logged out')
-  //   },
-  //   fetchUser: (accessToken) => {
-  //     // do something to return the user
-  //     // const user = User.findByToken(accessToken)
-  //     // return user
-  //     console.log('fetchUser')
-  //     return {};
-  //   }
-  // }
 }
