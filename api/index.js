@@ -1,6 +1,8 @@
 const express = require('express')
 const router = express.Router()
 const ideas = require('./ideas')
+const passport = require('passport')
+
 let app = express()
 app.use(router)
 
@@ -27,6 +29,17 @@ router.post('/logout', (req, res) => {
   delete req.session.authUser
   res.json({ ok: true })
 })
+
+router.get('/auth', passport.authenticate('google', {
+  scope: ['https://www.googleapis.com/auth/userinfo.profile']
+}));
+
+router.get('/auth/google/callback',
+  passport.authenticate('google', {
+    failureRedirect: '/'
+  }),
+  (req, res) => {}
+);
 
 module.exports = {
   path: '/api',

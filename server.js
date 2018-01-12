@@ -3,8 +3,14 @@ const Builder = require('nuxt').Builder
 const express = require('express')
 const session = require('express-session')
 const bodyParser = require('body-parser')
+const passport = require('passport')
+const passportAuth = require('./passport-auth')
 const eventer = require('./lib/eventer')
 const app = express()
+
+passportAuth(passport);
+app.use(passport.initialize());
+
 app.use(bodyParser.json()) // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(session({
