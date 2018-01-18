@@ -36,7 +36,8 @@ router.get('/auth', passport.authenticate('google', {
 
 router.get('/auth/callback',
   passport.authenticate('google', {
-    failureRedirect: '/'
+    failureRedirect: '/ideas#BAD',
+    successRedirect: '/ideas'
   }),
   (req, res) => {
     console.log('authenticated')
