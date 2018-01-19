@@ -6,14 +6,14 @@
             <div class="row">
                 <div class="col-sm">
                     <h1 class="title">
-                        Ideas
+                        .
                     </h1>
                 </div>
                 <auth></auth>
             </div>
             <div class="row">
                 <div class="col-sm">
-                    <h3>New Idea:</h3>
+                    <h3> Idea:</h3>
 
                     <div class="idea-title-container">
                         <form class="form-inline idea-form"

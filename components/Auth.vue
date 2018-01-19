@@ -1,16 +1,17 @@
 <template>
   <div class="container">
-    <h1>Please login to see the secret content</h1>
+    <h1>Please login</h1>
     <form v-if="!$store.state.authUser" @submit.prevent="login">
       <p class="error" v-if="formError">{{ formError }}</p>
       <p><i>To login, use <b>demo</b> as username and <b>demo</b> as password.</i></p>
+      <a href="/api/auth">Login with Google</a>
       <p>Username: <input type="text" v-model="formUsername" name="username" /></p>
       <p>Password: <input type="password" v-model="formPassword" name="password" /></p>
       <button type="submit">Login</button>
     </form>
     <div v-else>
-      Hello {{ $store.state.authUser.username }}!
-      <pre>I am the secret content, I am shown only when the use is connected.</pre>
+      <h3>Hello {{ $store.state.authUser.username }}!</h3>
+      <pre>secret content, I am shown only when the use is connected.</pre>
       <p><i>You can also refresh this page, you'll still be connected!</i></p>
       <button @click="logout">Logout</button>
     </div>

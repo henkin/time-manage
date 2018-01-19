@@ -9,16 +9,16 @@ const eventer = require('./lib/eventer')
 const app = express()
 
 passportAuth(passport);
-app.use(passport.initialize());
-
 app.use(bodyParser.json()) // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(session({
-  secret: 'super-secret-key',
+  secret: 'henkin-ville',
   resave: false,
   saveUninitialized: false,
   cookie: { maxAge: 60000 }
 }))
+app.use(passport.initialize());
+app.use(passport.session());
 
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)

@@ -30,6 +30,7 @@ router.post('/logout', (req, res) => {
   res.json({ ok: true })
 })
 
+// Passport Auth
 router.get('/auth', passport.authenticate('google', {
   scope: ['https://www.googleapis.com/auth/userinfo.profile']
 }));
