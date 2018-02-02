@@ -26,7 +26,8 @@ router.post('/login', (req, res) => {
 
 // Add POST - /api/logout
 router.post('/logout', (req, res) => {
-  delete req.session.authUser
+  //delete req.session.authUser
+  delete req.user
   res.json({ ok: true })
 })
 

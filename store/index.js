@@ -37,8 +37,12 @@ const createStore = () => {
         // if (req.session && req.session.authUser) {
         //   commit('SET_USER', req.session.authUser)
         // }
-        if (req.session && req.session.authUser) {
-          commit('SET_USER', req.session.authUser)
+        // if (req.session && req.session.authUser) {
+        //   commit('SET_USER', req.session.authUser)
+        // }
+
+        if (req.user) {
+          commit('SET_USER', req.user)
         }
 
         return dispatch('loadIdeas')
