@@ -3,12 +3,12 @@ const config = require('./local/config').google;
 
 module.exports = (passport) => {
   passport.serializeUser((user, done) => {
-    console.info('serialize user:', user);
+    console.info('serialize user...');
     done(null, user);
   });
 
   passport.deserializeUser((user, done) => {
-    console.info('DEserialize user', user)
+    console.info('DEserialize user...')
     done(null, user);
   });
 
