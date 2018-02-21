@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="layout-panel">
     <nuxt/>
   </div>
 </template>

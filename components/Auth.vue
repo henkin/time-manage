@@ -1,21 +1,19 @@
 <template>
   <div class="container">
-    <h1>Please login</h1>
     <form v-if="!$store.state.authUser" @submit.prevent="login">
-      <p class="error" v-if="formError">{{ formError }}</p>
-      <p><i>To login, use <b>demo</b> as username and <b>demo</b> as password.</i></p>
       <a href="/api/auth">Login with Google</a>
-      <p>Username: <input type="text" v-model="formUsername" name="username" /></p>
-      <p>Password: <input type="password" v-model="formPassword" name="password" /></p>
-      <button type="submit">Login</button>
+      <!--<p class="error" v-if="formError">{{ formError }}</p>-->
+      <!--<p><i>To login, use <b>demo</b> as username and <b>demo</b> as password.</i></p>-->
+      <!--<p>Username: <input type="text" v-model="formUsername" name="username" /></p>-->
+      <!--<p>Password: <input type="password" v-model="formPassword" name="password" /></p>-->
+      <!--<button type="submit">Login</button>-->
     </form>
     <div v-else>
-      <h3>Hello {{ $store.state.authUser.username }}!</h3>
-      <pre>secret content, I am shown only when the use is connected.</pre>
-      <p><i>You can also refresh this page, you'll still be connected!</i></p>
+      <h4>Hello {{ $store.state.authUser.profile.name.givenName }}!</h4>
       <button @click="logout">Logout</button>
+      <p><nuxt-link to="/secret">Super secret page</nuxt-link></p>
     </div>
-    <p><nuxt-link to="/secret">Super secret page</nuxt-link></p>
+
   </div>
 </template>
 
