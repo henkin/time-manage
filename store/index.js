@@ -37,16 +37,14 @@ const createStore = () => {
         // if (req.session && req.session.authUser) {
         //   commit('SET_USER', req.session.authUser)
         // }
-        // if (req.session && req.session.authUser) {
-        //   commit('SET_USER', req.session.authUser)
-        // }
-
+        //console.log('nuxtServerInit. Session: ', req.session)
         if (req.user) {
           commit('SET_USER', req.user)
         }
 
         return dispatch('loadIdeas')
       },
+
       async addIdea ({commit}, name) {
         try {
           let idea = { name: name, id: uuidv4() }
@@ -57,6 +55,7 @@ const createStore = () => {
           console.error('BAD state.addIdea', err)
         }
       },
+
       async loadIdeas ({ dispatch, commit }) {
         try {
           let ideas = await axios.get(url)
@@ -67,6 +66,7 @@ const createStore = () => {
           console.warn('failed: state.loadIdeas', err)
         }
       },
+
       async init ({ dispatch, commit }, io) {
         socketClient.init(io)
         socketClient.subscribe(io, 'ideas', x => commit('updateArray', x))
