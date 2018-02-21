@@ -1,5 +1,11 @@
 <template>
-  <div id="layout-panel">
+  <div class="container">
+    <!--<logo/>-->
+    <div class="row">
+      AUTH:
+      <auth></auth>
+    </div>
+
     <nuxt/>
   </div>
 </template>
@@ -50,3 +56,10 @@ html {
   background-color: #35495e;
 }
 </style>
+<script>
+  import Auth from '~/components/Auth.vue'
+
+  export default {
+    components: {Auth}
+  }
+</script>

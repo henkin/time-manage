@@ -1,64 +1,52 @@
 <template>
-    <div class="container">
-        <div style="width: 100%">
+  <div style="width: 100%">
+    <div class="row">
+      <div class="col-sm">
+        <h3> Idea:</h3>
 
-            <!--<logo/>-->
-            <div class="row">
-                <div class="col-sm">
-                    <h1 class="title">
-                        .
-                    </h1>
-                </div>
-                <auth></auth>
+        <div class="idea-title-container">
+          <form class="form-inline idea-form"
+                v-on:submit.prevent="createIdea"
+                autocomplete="off">
+            <div class="input-group">
+              <label class="sr-only" for="inlineFormInput">Name</label>
+              <!-- these are to remove the autocomplete from Chrome -->
+              <input style="display:none" type="text" name="fakeusernameremembered"/>
+              <input style="display:none" type="password" name="fakepasswordremembered"/>
+              <input v-model="name"
+                     autofocus
+                     type="text"
+                     autocomplete="new-password"
+                     id="idea-title"
+                     v-focus="focused"
+                     @focus="focused = true"
+                     @blur="focused = false"
+              />
+              <!--<div class="input-group-addon">@</div>-->
+              <button type="submit" class="btn btn-primary right-side">Submit</button>
             </div>
-            <div class="row">
-                <div class="col-sm">
-                    <h3> Idea:</h3>
+          </form>
+          <!--<button type="submit" text="asdf">yes</button>-->
+        </div>
+      </div>
+    </div>
 
-                    <div class="idea-title-container">
-                        <form class="form-inline idea-form"
-                              v-on:submit.prevent="createIdea"
-                              autocomplete="off">
-                            <div class="input-group">
-                                <label class="sr-only" for="inlineFormInput">Name</label>
-                                <!-- these are to remove the autocomplete from Chrome -->
-                                <input style="display:none" type="text" name="fakeusernameremembered"/>
-                                <input style="display:none" type="password" name="fakepasswordremembered"/>
-                                <input v-model="name"
-                                       autofocus
-                                       type="text"
-                                       autocomplete="new-password"
-                                       id="idea-title"
-                                       v-focus="focused"
-                                       @focus="focused = true"
-                                       @blur="focused = false"
-                                />
-                                <!--<div class="input-group-addon">@</div>-->
-                                <button type="submit" class="btn btn-primary right-side">Submit</button>
-                            </div>
-                        </form>
-                        <!--<button type="submit" text="asdf">yes</button>-->
-                    </div>
-                </div>
-            </div>
+    <div class="row">
 
-            <div class="row">
+      <h4>Count: {{ ideas.length }}</h4>
 
-                <h4>Count: {{ ideas.length }}</h4>
-
-                <transition-group name="idea-list" tag="ul">
-                    <li class="row idea-item" v-for="idea in ideas" :key="idea.id">
-                        <div class="col-md-8 idea-list-name">
+      <transition-group name="idea-list" tag="ul">
+        <li class="row idea-item" v-for="idea in ideas" :key="idea.id">
+          <div class="col-md-8 idea-list-name">
                             <span class="idea-item-name-span"
                                   v-bind:class="{saving: !idea.createdAt }">{{ idea.name }}</span>
-                        </div>
-                        <div class="col-md-3 idea-list-createdAt float-right"> {{ agoTime(idea.createdAt) }}</div>
-                    </li>
-                </transition-group>
+          </div>
+          <div class="col-md-3 idea-list-createdAt float-right"> {{ agoTime(idea.createdAt) }}</div>
+        </li>
+      </transition-group>
 
-            </div>
-        </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -71,7 +59,7 @@
 
   export default {
     directives: {focus: focus},
-    components: { Auth },
+    components: {Auth},
     data () {
       return {
         focused: true,
